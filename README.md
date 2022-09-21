@@ -16,8 +16,7 @@ To utilize Valet during the private beta you will need to request access to the 
   - **ADO2GH** - `gh extension install github/gh-ado2gh`
   - **Valet** - `gh extension install github/gh-valet` 
   
-  _Note: Valet requires Docker_
-   
+  _Note: Valet requires Docker to be installed. You may also need to login to GHCR `echo $GH_PAT | docker login ghcr.io -u <github-handle> --password-stdin`_ 
 
 ## Setup credentials on both platforms
 
@@ -113,3 +112,19 @@ Full command: `gh ado2gh configure-autolink --github-org <github-org> --github-r
 
 Others tools are aldo available and can be discovered by running `gh ado2gh --help`
 
+## Valet
+
+While GitHub can integrate directly with Azure Pipelines, we also offering a migration tool to assist in rewriting all type ADO pipelines (classic, yaml, and release) to GitHub workflows using Valet.
+  
+### Performing an assessment
+
+The first step in the process is to perform a dry run to get a summary view of how well Valet will be able to migrate your pipelines.
+  
+`gh valet audit azure-devops -g <ado-org> -p <ado-project> -o valet-audit`
+  
+The `audit_summary.md` file provides a high level overview of all the tasks and their ability to be migrated to GitHub. 
+  
+In addition, a folder per project is created with all of the migrated pipelines for individual inspection.
+
+  
+  
